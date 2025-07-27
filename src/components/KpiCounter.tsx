@@ -23,7 +23,7 @@ export default function KpiCounter({
 }: KpiCounterProps) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, threshold: 0.5 });
+  const isInView = useInView(ref, { once: true });
 
   const colorClasses = {
     primary: 'text-primary',
