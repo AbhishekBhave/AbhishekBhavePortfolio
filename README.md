@@ -44,70 +44,6 @@ A modern, recruiter-friendly personal website built with Next.js 14, TypeScript,
 - **Git Hooks** – Husky + lint-staged
 - **Deployment** – Vercel with preview deployments
 
-## 📦 Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/abhishekbhave/portfolio.git
-   cd portfolio
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env.local
-   ```
-   
-   Add your configuration:
-   ```env
-   # Supabase
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-   SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-   
-   # Email (Resend)
-   RESEND_API_KEY=your_resend_api_key
-   
-   # Security
-   HCAPTCHA_SITE_KEY=your_hcaptcha_site_key
-   HCAPTCHA_SECRET_KEY=your_hcaptcha_secret_key
-   
-   # Analytics
-   PLAUSIBLE_DOMAIN=your_domain.com
-   
-   # Resume
-   RESUME_PDF_URL=https://your-cdn.com/resume.pdf
-   ```
-
-4. **Run the development server**
-   ```bash
-   npm run dev
-   ```
-
-5. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## 🎨 Customization
-
-### Content Updates
-- **Personal Info** – Update `src/app/layout.tsx` metadata
-- **Resume Data** – Modify `src/data/resume.ts`
-- **Projects** – Edit `src/data/projects.ts`
-- **Speaking** – Update `src/data/speaking.ts`
-
-### Styling
-- **Colors** – Customize in `tailwind.config.js`
-- **Fonts** – Update Google Fonts import in `globals.css`
-- **Components** – Modify individual component files
-
-### Features
-- **Email Integration** – Configure in `src/app/api/contact/route.ts`
-- **Analytics** – Set up Plausible in `src/app/layout.tsx`
-- **Resume Download** – Update `src/app/api/resume/route.ts`
 
 ## 📁 Project Structure
 
@@ -132,58 +68,6 @@ src/
 └── types/                 # TypeScript definitions
 ```
 
-## 🚀 Deployment
-
-### Vercel (Recommended)
-1. Connect your GitHub repository to Vercel
-2. Configure environment variables in Vercel dashboard
-3. Deploy automatically on push to main branch
-
-### Manual Deployment
-```bash
-npm run build
-npm start
-```
-
-## 🧪 Testing
-
-```bash
-# Run Playwright tests
-npm run test
-
-# Run tests in headed mode
-npm run test:e2e
-```
-
-## 📊 Performance
-
-- **Lighthouse Score** – 95+ across all metrics
-- **Core Web Vitals** – All green
-- **Bundle Size** – <100kb initial JS load
-- **Loading Speed** – <1s LCP on 4G
-
-## 🔒 Security
-
-- **Form Protection** – hCaptcha integration
-- **Input Validation** – Server-side validation
-- **Security Headers** – CSP, X-Frame-Options, etc.
-- **HTTPS Only** – Secure connections enforced
-
-## 📈 Analytics
-
-Privacy-focused analytics with Plausible:
-- No cookies or personal data collection
-- GDPR compliant
-- Real-time dashboard
-- Custom event tracking
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## 📄 License
 
@@ -196,8 +80,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Animations** – Framer Motion for smooth interactions
 - **Performance** – Next.js team for the amazing framework
 
----
 
-**Built with ❤️ by Abhishek Bhave**
-
-For questions or collaboration opportunities, reach out at [abhishek@example.com](mailto:abhishek@example.com) 
+For questions or collaboration opportunities, reach out at [bhave.13@osu.edu](mailto:bhave.13@osu.edu) 
