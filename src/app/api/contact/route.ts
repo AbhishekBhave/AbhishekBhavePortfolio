@@ -8,23 +8,42 @@ interface ContactData {
   captchaToken?: string;
 }
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const sanitize = (value: string) => value.replace(/\s+/g, ' ').trim();
+
+const parseContactData = (input: ContactData) => ({
+  name: sanitize(input.name || ''),
+  email: sanitize((input.email || '').toLowerCase()),
+  subject: sanitize(input.subject || ''),
+  message: (input.message || '').trim(),
+  captchaToken: sanitize(input.captchaToken || ''),
+});
+
 export async function POST(request: NextRequest) {
   try {
-    const body: ContactData = await request.json();
+    const rawBody: ContactData = await request.json();
+    const body = parseContactData(rawBody);
     
     // Validate required fields
     if (!body.name || !body.email || !body.subject || !body.message) {
       return NextResponse.json(
-        { error: 'All fields are required' },
+        { error: 'All fields are required.' },
+        { status: 400 }
+      );
+    }
+
+    if (body.name.length > 80 || body.subject.length > 120 || body.message.length > 5000) {
+      return NextResponse.json(
+        { error: 'One or more fields exceed the allowed length.' },
         { status: 400 }
       );
     }
 
     // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(body.email)) {
+    if (!EMAIL_REGEX.test(body.email)) {
       return NextResponse.json(
-        { error: 'Invalid email format' },
+        { error: 'Please provide a valid email address.' },
         { status: 400 }
       );
     }
@@ -32,13 +51,23 @@ export async function POST(request: NextRequest) {
     // Validate message length
     if (body.message.length < 10) {
       return NextResponse.json(
-        { error: 'Message must be at least 10 characters long' },
+        { error: 'Message must be at least 10 characters long.' },
         { status: 400 }
       );
     }
 
-    // Verify hCaptcha token (if provided)
-    if (body.captchaToken) {
+    const captchaSecret = process.env.HCAPTCHA_SECRET_KEY;
+    const shouldVerifyCaptcha = process.env.NODE_ENV === 'production' && Boolean(captchaSecret);
+
+    if (shouldVerifyCaptcha && !body.captchaToken) {
+      return NextResponse.json(
+        { error: 'Captcha verification is required.' },
+        { status: 400 }
+      );
+    }
+
+    // Verify hCaptcha token when enabled
+    if (shouldVerifyCaptcha && body.captchaToken) {
       try {
         const captchaResponse = await fetch('https://hcaptcha.com/siteverify', {
           method: 'POST',
@@ -46,7 +75,7 @@ export async function POST(request: NextRequest) {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: new URLSearchParams({
-            secret: process.env.HCAPTCHA_SECRET_KEY || '',
+            secret: captchaSecret || '',
             response: body.captchaToken,
           }),
         });
@@ -54,23 +83,25 @@ export async function POST(request: NextRequest) {
         const captchaResult = await captchaResponse.json();
         if (!captchaResult.success) {
           return NextResponse.json(
-            { error: 'Captcha verification failed' },
+            { error: 'Captcha verification failed.' },
             { status: 400 }
           );
         }
       } catch (error) {
         console.error('Captcha verification error:', error);
-        // Continue without captcha verification in development
+        return NextResponse.json(
+          { error: 'Captcha verification failed. Please try again.' },
+          { status: 502 }
+        );
       }
     }
 
-    // Send email notification
-    // This would be replaced with your actual email service (SendGrid, Resend, etc.)
+    // Placeholder transport for MVP: log server-side until email provider is configured.
     console.log('Contact form submission:', {
       name: body.name,
       email: body.email,
       subject: body.subject,
-      message: body.message,
+      messagePreview: `${body.message.slice(0, 120)}${body.message.length > 120 ? '…' : ''}`,
       timestamp: new Date().toISOString(),
     });
 
@@ -90,14 +121,14 @@ export async function POST(request: NextRequest) {
     // });
 
     return NextResponse.json(
-      { message: 'Message sent successfully' },
+      { message: 'Message sent successfully.' },
       { status: 200 }
     );
     
   } catch (error) {
     console.error('Contact form error:', error);
     return NextResponse.json(
-      { error: 'Failed to send message' },
+      { error: 'Failed to send message. Please try again later.' },
       { status: 500 }
     );
   }

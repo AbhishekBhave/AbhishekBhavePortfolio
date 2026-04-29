@@ -82,3 +82,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 
 For questions or collaboration opportunities, reach out at [bhave.13@osu.edu](mailto:bhave.13@osu.edu) 
+
+## Environment Variables (MVP)
+
+Copy `env.example` to `.env.local` and set at least:
+
+- `NEXT_PUBLIC_SITE_URL` (for canonical URLs and metadata base)
+- `NEXT_PUBLIC_CONTACT_EMAIL` (displayed contact email)
+- `NEXT_PUBLIC_CALENDLY_URL` (optional scheduling link)
+
+Optional for production contact hardening:
+
+- `HCAPTCHA_SECRET_KEY` (required only if captcha verification is enabled in production)
+- `HCAPTCHA_SITE_KEY` (only if client-side captcha widget is added)
+
+The MVP contact route works without third-party email providers and logs submissions server-side until a provider is wired.

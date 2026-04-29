@@ -1,8 +1,15 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ProjectTile from '@/components/ProjectTile';
-import { projects, projectCategories } from '@/data/projects';
+import { projects } from '@/data/projects';
+
+export const metadata: Metadata = {
+  title: 'Projects | Abhishek Bhave',
+  description:
+    'Selected software, AI, and nonprofit product projects built by Abhishek Bhave.',
+};
 
 export default function ProjectsPage() {
   return (
@@ -13,10 +20,10 @@ export default function ProjectsPage() {
       <section className="pt-20 pb-12 bg-gradient-to-br from-white via-accent to-white">
         <div className="max-w-4xl mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">
-            Projects Lab
+            Projects
           </h1>
           <p className="text-xl text-gray-600 text-center mb-8">
-            Showcasing innovative solutions at the intersection of AI, Business & Technology
+            Selected builds across software engineering, AI systems, and nonprofit product work.
           </p>
         </div>
       </section>

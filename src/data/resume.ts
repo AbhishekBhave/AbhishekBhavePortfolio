@@ -77,6 +77,68 @@ export const resumeData: ResumeItem[] = [
   }
 ];
 
+export const speakingStats = {
+  talks: 15,
+  audience: 10000,
+  sponsorshipsRaisedK: 250,
+};
+
+export const featuredTalks = [
+  {
+    title: 'AI Ethics in Cybersecurity: Balancing Innovation and Responsibility',
+    event: 'Black Hat USA 2024',
+    location: 'Las Vegas, NV',
+    summary:
+      'Explored ethical trade-offs in AI-assisted threat detection, including bias mitigation, model transparency, and privacy safeguards.',
+    tags: ['AI Ethics', 'Cybersecurity', 'Responsible AI'],
+  },
+  {
+    title: 'Mental Health in Tech: Building Sustainable Careers',
+    event: 'Grace Hopper Celebration 2024',
+    location: 'Orlando, FL',
+    summary:
+      'Shared practical burnout-prevention frameworks and evidence-based habits for engineering teams operating in high-stress environments.',
+    tags: ['Mental Health', 'Career Sustainability', 'Wellness'],
+  },
+  {
+    title: 'The Future of AI-Powered Risk Assessment',
+    event: 'AI Summit 2024',
+    location: 'San Francisco, CA',
+    summary:
+      "Presented real-world learnings from enterprise AI risk scoring systems, including model governance and production reliability.",
+    tags: ['AI Risk Assessment', 'Enterprise AI', 'Machine Learning'],
+  },
+  {
+    title: 'Building Inclusive Tech Communities',
+    event: 'CodePioneers Summit 2024',
+    location: 'Atlanta, GA',
+    summary:
+      'Covered mentorship program design, inclusive hiring pipelines, and community-building practices for long-term technical growth.',
+    tags: ['Diversity', 'Mentorship', 'Community'],
+  },
+];
+
+export const leadershipRoles = [
+  {
+    title: 'Founder & CEO, CodePioneers',
+    period: '2023 - Present',
+    summary:
+      'Leading a nonprofit that connects developers with NGOs and small businesses, coordinating a distributed engineering team and strategic partnerships.',
+  },
+  {
+    title: 'President, Georgia Tech Cybersecurity Club',
+    period: '2023 - 2024',
+    summary:
+      'Organized technical workshops and community events for 200+ members to strengthen practical security skills and career readiness.',
+  },
+  {
+    title: 'Mentor, Women in Technology',
+    period: '2022 - Present',
+    summary:
+      'Mentored students and early-career professionals through project coaching, interview preparation, and long-term career planning.',
+  },
+];
+
 export const education = {
   degree: 'Bachelor of Science in Computer Science',
   school: 'Georgia Institute of Technology',

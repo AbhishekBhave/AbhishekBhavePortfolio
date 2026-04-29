@@ -11,6 +11,7 @@ export interface Project {
   videoUrl?: string;
   featured: boolean;
   year: number;
+  impact?: string;
 }
 
 export const projects: Project[] = [
@@ -26,7 +27,8 @@ export const projects: Project[] = [
     liveUrl: 'https://codepioneers.org',
     videoUrl: 'https://youtube.com/watch?v=example',
     featured: true,
-    year: 2024
+    year: 2024,
+    impact: 'Led delivery of 15+ websites and digital products for mission-driven organizations.',
   },
   {
     id: 'p-g-ai-risk-engine',
@@ -37,7 +39,8 @@ export const projects: Project[] = [
     technologies: ['Python', 'PySpark', 'Delta Lake', 'Vector DB', 'Azure', 'MLflow'],
     category: 'ai',
     featured: true,
-    year: 2024
+    year: 2024,
+    impact: 'Improved operational risk detection accuracy by 40% on enterprise-scale data pipelines.',
   },
   {
     id: 'mental-health-cybersecurity',
@@ -49,7 +52,8 @@ export const projects: Project[] = [
     category: 'research',
     githubUrl: 'https://github.com/abhishekbhave/cybersecurity-mental-health',
     featured: true,
-    year: 2024
+    year: 2024,
+    impact: 'Built predictive models for stress indicators and presented findings at national conferences.',
   },
   {
     id: 'real-time-notifications',

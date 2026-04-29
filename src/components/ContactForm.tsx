@@ -18,6 +18,9 @@ interface FormErrors {
   message?: string;
 }
 
+const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'bhave.13@osu.edu';
+const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL;
+
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -28,7 +31,7 @@ export default function ContactForm() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState('');
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -59,6 +62,7 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
     
     if (!validateForm()) {
       return;
@@ -73,22 +77,21 @@ export default function ContactForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          captchaToken,
-        }),
+        body: JSON.stringify(formData),
       });
+
+      const payload = await response.json();
 
       if (response.ok) {
         setIsSubmitted(true);
         setFormData({ name: '', email: '', subject: '', message: '' });
         setErrors({});
       } else {
-        throw new Error('Failed to send message');
+        setSubmitError(payload.error || 'Failed to send message. Please try again.');
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      setErrors({ message: 'Failed to send message. Please try again.' });
+      setSubmitError('Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -112,7 +115,7 @@ export default function ContactForm() {
         <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
         <h3 className="text-2xl font-semibold text-gray-900 mb-2">Message Sent!</h3>
         <p className="text-gray-600 mb-6">
-          Thank you for reaching out. I'll get back to you within 24 hours.
+          Thank you for reaching out. I typically respond within 1 business day.
         </p>
         <motion.button
           onClick={() => setIsSubmitted(false)}
@@ -227,16 +230,18 @@ export default function ContactForm() {
             )}
           </div>
 
-          {/* hCaptcha would go here */}
           <div className="bg-gray-50 p-4 rounded-lg">
-            <p className="text-sm text-gray-600 mb-2">
-              <strong>Security:</strong> This form is protected by hCaptcha
+            <p className="text-sm text-gray-600">
+              Form submissions are rate-limited and validated server-side to prevent abuse.
             </p>
-            {/* <HCaptcha
-              sitekey="your-hcaptcha-site-key"
-              onVerify={(token) => setCaptchaToken(token)}
-            /> */}
           </div>
+
+          {submitError && (
+            <p className="text-sm text-red-600 flex items-center gap-1" role="alert">
+              <AlertCircle className="w-4 h-4" />
+              {submitError}
+            </p>
+          )}
 
           <motion.button
             type="submit"
@@ -279,8 +284,8 @@ export default function ContactForm() {
               </div>
               <div>
                 <p className="font-medium text-gray-900">Email</p>
-                <a href="mailto:abhishek@example.com" className="text-primary hover:underline">
-                  abhishek@example.com
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">
+                  {CONTACT_EMAIL}
                 </a>
               </div>
             </div>
@@ -291,7 +296,12 @@ export default function ContactForm() {
               </div>
               <div>
                 <p className="font-medium text-gray-900">Schedule a Call</p>
-                <a href="#" className="text-primary hover:underline">
+                <a
+                  href={CALENDLY_URL || '/contact'}
+                  className={`text-primary hover:underline ${!CALENDLY_URL ? 'pointer-events-none opacity-70' : ''}`}
+                  target={CALENDLY_URL ? '_blank' : undefined}
+                  rel={CALENDLY_URL ? 'noopener noreferrer' : undefined}
+                >
                   Book a 30-minute meeting
                 </a>
               </div>
@@ -308,11 +318,14 @@ export default function ContactForm() {
               Let's discuss your project or opportunity
             </p>
             <a
-              href="#"
+              href={CALENDLY_URL || '/contact'}
               className="btn-secondary inline-flex items-center gap-2"
+              target={CALENDLY_URL ? '_blank' : undefined}
+              rel={CALENDLY_URL ? 'noopener noreferrer' : undefined}
+              aria-disabled={!CALENDLY_URL}
             >
               <Calendar className="w-4 h-4" />
-              Open Calendar
+              {CALENDLY_URL ? 'Open Calendar' : 'Calendar link coming soon'}
             </a>
           </div>
           {/* Calendly inline widget would go here */}

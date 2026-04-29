@@ -1,7 +1,14 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import CodeRunner from '@/components/CodeRunner';
+
+export const metadata: Metadata = {
+  title: 'Playground | Abhishek Bhave',
+  description:
+    'Interactive code playground with lightweight JavaScript and Python demos.',
+};
 
 export default function PlaygroundPage() {
   return (
