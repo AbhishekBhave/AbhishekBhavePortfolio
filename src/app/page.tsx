@@ -1,12 +1,18 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import HeroSection from '@/components/HeroSection';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ProjectTile from '@/components/ProjectTile';
-import CodeRunner from '@/components/CodeRunner';
 import { SpeakingKpiCounter, AudienceKpiCounter, SponsorshipKpiCounter } from '@/components/KpiCounter';
 import ContactForm from '@/components/ContactForm';
 import { projects } from '@/data/projects';
+
+export const metadata: Metadata = {
+  title: 'Abhishek Bhave | AI Engineer Portfolio',
+  description:
+    'Portfolio of Abhishek Bhave: AI product engineering, project delivery, and leadership experience across startups, enterprise, and research.',
+};
 
 export default function Home() {
   return (
@@ -58,40 +64,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Tech Playground Section */}
-      <section id="playground" className="py-16 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Tech Playground</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            <CodeRunner
-              language="python"
-              title="Data Analysis Example"
-              description="Demonstrating Python data manipulation skills"
-              initialCode={`import pandas as pd
-
-# Sample data
-data = {'Name': ['Alice', 'Bob'], 'Age': [25, 30]}
-df = pd.DataFrame(data)
-print(df)`}
-            />
-            <CodeRunner
-              language="javascript"
-              title="React Component"
-              description="Modern React with hooks"
-              initialCode={`function Counter() {
-  const [count, setCount] = useState(0);
-  return <button onClick={() => setCount(count + 1)}>{count}</button>;
-}`}
-            />
-          </div>
-          <div className="text-center">
-            <a href="/playground" className="btn-primary">
-              Explore Playground
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Speaking Section */}
       <section id="speaking" className="py-16">
         <div className="max-w-6xl mx-auto px-4">
@@ -114,6 +86,19 @@ print(df)`}
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Get in Touch</h2>
           <ContactForm />
+        </div>
+      </section>
+
+      {/* Optional Playground CTA */}
+      <section className="py-16">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4">Explore Technical Demos</h2>
+          <p className="text-lg text-gray-600 mb-8">
+            See interactive coding examples in the optional Tech Playground.
+          </p>
+          <a href="/playground" className="btn-secondary">
+            Open Playground
+          </a>
         </div>
       </section>
 

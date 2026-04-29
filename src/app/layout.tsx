@@ -17,7 +17,11 @@ const sourceSans3 = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: 'Abhishek Bhave – Interactive Portfolio & Résumé Hub',
+  metadataBase: new URL('https://abhishekbhave.com'),
+  title: {
+    default: 'Abhishek Bhave | AI Engineer Portfolio',
+    template: '%s | Abhishek Bhave',
+  },
   description: 'Building impact at the intersection of AI, Business & Education. Stamps Eminence Scholar · AI Intern @ P&G · Founder @ CodePioneers',
   keywords: ['Abhishek Bhave', 'AI', 'Machine Learning', 'Business', 'Education', 'Portfolio', 'Résumé'],
   authors: [{ name: 'Abhishek Bhave' }],
@@ -26,18 +30,30 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://abhishekbhave.com',
-    title: 'Abhishek Bhave – Interactive Portfolio & Résumé Hub',
+    title: 'Abhishek Bhave | AI Engineer Portfolio',
     description: 'Building impact at the intersection of AI, Business & Education',
     siteName: 'Abhishek Bhave Portfolio',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Abhishek Bhave portfolio website preview',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Abhishek Bhave – Interactive Portfolio & Résumé Hub',
+    title: 'Abhishek Bhave | AI Engineer Portfolio',
     description: 'Building impact at the intersection of AI, Business & Education',
+    images: ['/og-image.jpg'],
   },
   robots: {
     index: true,
     follow: true,
+  },
+  alternates: {
+    canonical: '/',
   },
 };
 

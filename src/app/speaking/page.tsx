@@ -1,7 +1,14 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { SpeakingKpiCounter, AudienceKpiCounter, SponsorshipKpiCounter } from '@/components/KpiCounter';
+
+export const metadata: Metadata = {
+  title: 'Speaking | Abhishek Bhave',
+  description:
+    'Talks, workshops, and leadership highlights on AI, engineering, and community building.',
+};
 
 export default function SpeakingPage() {
   return (

@@ -36,7 +36,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
-          Stamps Eminence Scholar · AI Intern @ P&G · Founder @ CodePioneers
+          AI engineer focused on reliable product delivery, pragmatic machine learning, and community-driven leadership.
         </motion.p>
 
         <motion.div
@@ -46,13 +46,19 @@ export default function HeroSection() {
           transition={{ delay: 0.4, duration: 0.6 }}
         >
           <ResumeDownloadButton />
-          
+
           <Link
             href="/resume"
             className="btn-secondary flex items-center gap-2 group"
           >
             <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             View Interactive Résumé
+          </Link>
+          <Link
+            href="/contact"
+            className="btn-secondary flex items-center gap-2"
+          >
+            Let&apos;s Connect
           </Link>
         </motion.div>
 

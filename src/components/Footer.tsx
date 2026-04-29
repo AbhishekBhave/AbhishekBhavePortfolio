@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import Link from 'next/link';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const socialLinks = [
   {
@@ -18,14 +19,8 @@ const socialLinks = [
     color: 'hover:text-gray-800',
   },
   {
-    name: 'Twitter',
-    href: 'https://twitter.com/abhishekbhave',
-    icon: Twitter,
-    color: 'hover:text-blue-400',
-  },
-  {
     name: 'Email',
-    href: 'mailto:abhishek@example.com',
+    href: 'mailto:bhave.13@osu.edu',
     icon: Mail,
     color: 'hover:text-red-500',
   },
@@ -51,26 +46,18 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-900">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#resume" className="text-gray-600 hover:text-primary transition-colors">
-                  Interactive Résumé
-                </a>
-              </li>
-              <li>
-                <a href="#projects" className="text-gray-600 hover:text-primary transition-colors">
-                  Projects Lab
-                </a>
-              </li>
-              <li>
-                <a href="#playground" className="text-gray-600 hover:text-primary transition-colors">
-                  Tech Playground
-                </a>
-              </li>
-              <li>
-                <a href="#speaking" className="text-gray-600 hover:text-primary transition-colors">
-                  Speaking & Leadership
-                </a>
-              </li>
+              {[
+                { href: '/projects', label: 'Projects' },
+                { href: '/resume', label: 'Résumé' },
+                { href: '/speaking', label: 'Speaking' },
+                { href: '/contact', label: 'Contact' },
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-gray-600 hover:text-primary transition-colors">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -100,7 +87,7 @@ export default function Footer() {
         <div className="mt-8 pt-8 border-t border-gray-200">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-500 text-sm">
-              © 2024 Abhishek Bhave. All rights reserved.
+              © {new Date().getFullYear()} Abhishek Bhave. All rights reserved.
             </p>
             <p className="text-gray-500 text-sm">
               Built with Next.js, TypeScript & TailwindCSS

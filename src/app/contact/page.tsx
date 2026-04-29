@@ -1,7 +1,14 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
+
+export const metadata: Metadata = {
+  title: 'Contact | Abhishek Bhave',
+  description:
+    'Contact Abhishek Bhave for engineering roles, consulting, speaking, and collaboration opportunities.',
+};
 
 export default function ContactPage() {
   return (
@@ -15,7 +22,7 @@ export default function ContactPage() {
             Get in Touch
           </h1>
           <p className="text-xl text-gray-600 text-center mb-8">
-            Let's discuss opportunities, collaborations, or just say hello!
+            Let&apos;s discuss opportunities, collaborations, or just say hello.
           </p>
         </div>
       </section>

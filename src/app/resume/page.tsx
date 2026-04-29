@@ -1,8 +1,15 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import TimelineCard from '@/components/TimelineCard';
 import { resumeData, education, skills } from '@/data/resume';
+
+export const metadata: Metadata = {
+  title: 'Resume',
+  description:
+    'Professional experience, education, and technical skills of Abhishek Bhave in AI engineering and product development.',
+};
 
 export default function ResumePage() {
   return (
